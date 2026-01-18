@@ -1,219 +1,610 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TradeVision Ma</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlas Trading | منصة توصيات التداول</title>
+    <meta name="description" content="Atlas Trading - منصة احترافية لمشاركة تحليلات وتوصيات التداول لأغراض تعليمية.">
 
-<style>
-body{
-margin:0;
-font-family:Segoe UI,Tahoma,Arial;
-background:#f4f6f9;
-color:#222
-}
-header{
-background:#0a2a43;
-color:#fff;
-padding:20px;
-text-align:center;
-position:relative
-}
-nav a{
-color:#fff;
-margin:0 12px;
-text-decoration:none;
-font-weight:bold
-}
-section{
-padding:60px 20px;
-max-width:1100px;
-margin:auto;
-display:none
-}
-section.active{display:block}
-.hero{text-align:center}
-.hero img{
-max-width:100%;
-border-radius:14px;
-margin-top:25px
-}
-.card{
-background:#fff;
-padding:30px;
-border-radius:14px;
-box-shadow:0 5px 15px rgba(0,0,0,.08)
-}
-footer{
-background:#0a2a43;
-color:#fff;
-text-align:center;
-padding:20px
-}
-.lang{
-position:absolute;
-top:15px;
-left:20px;
-cursor:pointer;
-font-weight:bold
-}
-.logo{
-display:flex;
-justify-content:center;
-align-items:center;
-gap:10px
-}
-.whatsapp{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#25D366;
-color:#fff;
-padding:15px;
-border-radius:50%;
-font-size:22px;
-text-decoration:none
-}
-</style>
+    <!-- Google Fonts: Cairo (Arabic) & Inter (English) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #0f172a; /* Deep Blue - Professional/Trust */
+            --secondary-color: #1e293b; /* Slate Dark */
+            --accent-color: #f59e0b; /* Gold/Amber - Wealth/Action */
+            --accent-hover: #d97706;
+            --text-light: #f8fafc;
+            --text-dark: #334155;
+            --bg-light: #f1f5f9;
+            --white: #ffffff;
+            --success: #10b981;
+            --danger: #ef4444;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif; /* Default Arabic */
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        html[lang="en"] body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--primary-color); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 4px; }
+
+        /* Header & Nav */
+        header {
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-light);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .logo-svg {
+            width: 40px;
+            height: 40px;
+            fill: var(--accent-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            font-weight: 600;
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-color);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            right: 0; /* RTL default */
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        html[dir="ltr"] nav a::after { right: auto; left: 0; }
+
+        nav a:hover::after { width: 100%; }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .lang-btn:hover {
+            background: var(--accent-color);
+            color: var(--white);
+        }
+
+        .cta-btn {
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(245, 158, 11, 0.3);
+            transition: var(--transition);
+        }
+
+        .cta-btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Menu */
+        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #000000 100%);
+            color: var(--text-light);
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero-badge {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--accent-color);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item h3 { font-size: 2rem; color: var(--accent-color); }
+        .stat-item span { font-size: 0.9rem; color: #94a3b8; }
+
+        /* Sections General */
+        section {
+            padding: 5rem 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-header .line {
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        /* Rules / T&C Section */
+        .rules-section {
+            background-color: var(--white);
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .rule-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border-right: 4px solid var(--accent-color); /* RTL default */
+            transition: var(--transition);
+            position: relative;
+        }
+
+        html[dir="ltr"] .rule-card {
+            border-right: none;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .rule-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            background: var(--white);
+        }
+
+        .rule-number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: rgba(15, 23, 42, 0.1);
+            position: absolute;
+            top: 10px;
+            left: 20px; /* Default RTL */
+        }
+        
+        html[dir="ltr"] .rule-number { left: auto; right: 20px; }
+
+        .rule-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .rule-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Legal Box */
+        .legal-disclaimer {
+            background-color: #fffbeb;
+            border: 1px solid #fcd34d;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-top: 4rem;
+            color: #92400e;
+        }
+
+        .legal-disclaimer h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+            color: #b45309;
+        }
+
+        .legal-ref {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #fcd34d;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info-item {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: #94a3b8;
+            padding: 4rem 5% 1rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col ul li { margin-bottom: 0.8rem; }
+        .footer-col ul li a:hover { color: var(--accent-color); }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px; /* RTL default */
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+            transform: translateY(100px);
+            transition: transform 0.3s ease;
+            z-index: 2000;
+            border-right: 4px solid var(--accent-color);
+        }
+
+        html[dir="ltr"] .toast {
+            right: auto;
+            left: 20px;
+            border-right: none;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .toast.show { transform: translateY(0); }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header { padding: 1rem; }
+            .hamburger { display: block; }
+            nav ul {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background: var(--primary-color);
+                flex-direction: column;
+                padding: 2rem;
+                transition: 0.3s;
+            }
+            nav ul.active { right: 0; }
+            
+            html[dir="ltr"] nav ul { right: auto; left: -100%; }
+            html[dir="ltr"] nav ul.active { left: 0; }
+
+            .hero h1 { font-size: 2.5rem; }
+            .about-grid, .contact-container { grid-template-columns: 1fr; }
+            .hero-stats { flex-direction: column; gap: 1.5rem; }
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-<div class="lang" onclick="switchLang()">AR | EN</div>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <!-- Custom SVG Logo for Atlas Trading -->
+            <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <!-- Globe Grid -->
+                <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none" />
+                <ellipse cx="50" cy="50" rx="45" ry="20" stroke="currentColor" stroke-width="1.5" fill="none" transform="rotate(30 50 50)"/>
+                <ellipse cx="50" cy="50" rx="45" ry="20" stroke="currentColor" stroke-width="1.5" fill="none" transform="rotate(-30 50 50)"/>
+                <line x1="5" y1="50" x2="95" y2="50" stroke="currentColor" stroke-width="1.5" />
+                <line x1="50" y1="5" x2="50" y2="95" stroke="currentColor" stroke-width="1.5" />
+                <!-- Upward Trend Arrow -->
+                <path d="M 25 70 Q 50 65 70 45 L 85 45 L 70 30 L 55 45 Q 45 55 25 55 Z" fill="var(--accent-color)" />
+            </svg>
+            <span>Atlas Trading</span>
+        </div>
 
-<div class="logo">
-<!-- CANDLE LOGO -->
-<svg width="45" height="45" viewBox="0 0 120 120">
-<rect x="20" y="30" width="15" height="50" fill="#00c853"/>
-<line x1="27" y1="15" x2="27" y2="95" stroke="#00c853" stroke-width="4"/>
-<rect x="55" y="45" width="15" height="35" fill="#d50000"/>
-<line x1="62" y1="25" x2="62" y2="95" stroke="#d50000" stroke-width="4"/>
-<rect x="90" y="20" width="15" height="60" fill="#00c853"/>
-<line x1="97" y1="10" x2="97" y2="95" stroke="#00c853" stroke-width="4"/>
-</svg>
-<h1>TradeVision Ma</h1>
-</div>
+        <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
 
-<nav>
-<a href="#" onclick="showPage('home')">الرئيسية</a>
-<a href="#" onclick="showPage('about')">من نحن</a>
-<a href="#" onclick="showPage('rules')">القوانين</a>
-<a href="#" onclick="showPage('contact')">تواصل معنا</a>
-</nav>
-</header>
+        <nav>
+            <ul id="nav-links">
+                <li><a href="#home" data-i18n="home">الرئيسية</a></li>
+                <li><a href="#about" data-i18n="about">من نحن</a></li>
+                <li><a href="#rules" data-i18n="rules">القوانين</a></li>
+                <li><a href="#contact" data-i18n="contact">تواصل معنا</a></li>
+            </ul>
+        </nav>
 
-<!-- HOME AR -->
-<section id="home" class="active ar">
-<div class="hero">
-<h2>مرحبا بكم في TradeVision Ma</h2>
-<p>منصة تعليمية لمشاركة التحليل والتجربة في أسواق التداول</p>
-<img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3" alt="Trading Candles">
-<p>اختر من القائمة أعلاه القسم الذي تريد زيارته</p>
-</div>
-</section>
+        <div class="header-actions">
+            <button class="lang-btn" id="lang-toggle">English</button>
+            <a href="#contact" class="cta-btn" data-i18n="join_now">اشترك الآن</a>
+        </div>
+    </header>
 
-<!-- HOME EN -->
-<section id="home-en" class="en">
-<div class="hero">
-<h2>Welcome to TradeVision Ma</h2>
-<p>An educational platform for sharing trading analysis and experience</p>
-<img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3" alt="Trading Candles">
-<p>Please choose a section from the menu above</p>
-</div>
-</section>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <span class="hero-badge" data-i18n="hero_badge">التداول الذكي يبدأ هنا</span>
+            <h1 data-i18n="hero_title">منصة أطلس للتحليل المالي والتداول</h1>
+            <p data-i18n="hero_desc">انضم إلى مجتمع المحترفين وشاركنا التحليلات الدقيقة لأسواق المال العالمية. شفافية، خبرة، والتزام بالقوانين.</p>
+            <div class="hero-btns">
+                <button class="cta-btn" onclick="scrollToSection('rules')" data-i18n="view_rules">عرض القوانين</button>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <h3>+18</h3>
+                    <span data-i18n="stat_age">سن القانوني</span>
+                </div>
+                <div class="stat-item">
+                    <h3>100%</h3>
+                    <span data-i18n="stat_transparency">شفافية</span>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <span data-i18n="stat_support">دعم ومتابعة</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- ABOUT -->
-<section id="about" class="ar">
-<div class="card">
-<h2>من نحن</h2>
-<p>
-TradeVision Ma منصة أنشأها متداولون مستقلون لمشاركة المعرفة والخبرة في الأسواق المالية،
-دون تقديم استشارات مالية مرخصة أو إدارة أموال الغير.
-</p>
-</div>
-</section>
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-header">
+            <h2 data-i18n="about_title">من نحن</h2>
+            <div class="line"></div>
+        </div>
+        <div class="about-grid">
+            <div class="about-img">
+                <img src="https://picsum.photos/seed/trading2/600/400.jpg" alt="Trading Analysis">
+            </div>
+            <div class="about-text">
+                <h3 data-i18n="about_sub">متداولون مستقلون لمساعدتك</h3>
+                <p data-i18n="about_p1">نحن لسنا شركة مرخصة أو مؤسسة مالية. نحن فقط متداولون مستقلون، نسعى لمشاركة خبرتنا وتجربتنا في الأسواق المالية لمساعدة الآخرين.</p>
+                <br>
+                <p data-i18n="about_p2">تم إنشاء هذه المجموعة بروح من التعاون والربح الجماعي، حيث نقدم تحليلاتنا وتوصياتنا لأغراض تعليمية فقط، مع التزام تام بالشفافية وإظهار النتائج سواء كانت رابحة أو خاسرة.</p>
+                <ul style="margin-top: 1.5rem;">
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color:var(--accent-color); margin-inline-end:10px;"></i> <span data-i18n="feat1">تحليلات فنية وأساسية دقيقة.</span></li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color:var(--accent-color); margin-inline-end:10px;"></i> <span data-i18n="feat2">مجتمع متعاون بعيد عن الصدقات.</span></li>
+                    <li><i class="fas fa-check-circle" style="color:var(--accent-color); margin-inline-end:10px;"></i> <span data-i18n="feat3">التزام كامل بالقوانين المغربية والدولية.</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-<section id="about-en" class="en">
-<div class="card">
-<h2>About Us</h2>
-<p>
-TradeVision Ma is an educational platform created by independent traders
-to share market experience without managing client funds.
-</p>
-</div>
-</section>
+    <!-- Rules Section -->
+    <section class="rules-section" id="rules">
+        <div class="section-header">
+            <h2 data-i18n="rules_title">القوانين والشروط</h2>
+            <div class="line"></div>
+            <p style="margin-top: 1rem; color: #64748b;" data-i18n="rules_subtitle">الالتزام بهذه القوانين ضروري لضمان بيئة تداول آمنة واحترافية.</p>
+        </div>
 
-<!-- RULES -->
-<section id="rules" class="ar">
-<div class="card">
-<h2>القوانين وإخلاء المسؤولية</h2>
-<ol>
-<li>لسنا شركة مرخصة أو مؤسسة مالية.</li>
-<li>جميع المحتويات لأغراض تعليمية فقط.</li>
-<li>الانضمام للبالغين (+18).</li>
-<li>لا نضمن أي أرباح.</li>
-<li>كل شخص مسؤول عن قراراته.</li>
-<li>نلتزم بالقوانين المغربية.</li>
-</ol>
-</div>
-</section>
-
-<section id="rules-en" class="en">
-<div class="card">
-<h2>Disclaimer</h2>
-<ul>
-<li>Not a licensed financial company</li>
-<li>Educational content only</li>
-<li>18+ only</li>
-<li>No profit guarantee</li>
-<li>Individual responsibility</li>
-</ul>
-</div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="ar">
-<div class="card">
-<h2>تواصل معنا</h2>
-<p>📱 التواصل عبر واتساب باستخدام الزر</p>
-<p>📊 تيليغرام: ضع رابطك هنا</p>
-<p>📧 بريد إلكتروني: ضع بريدك هنا</p>
-</div>
-</section>
-
-<section id="contact-en" class="en">
-<div class="card">
-<h2>Contact Us</h2>
-<p>📱 Contact us via WhatsApp using the button</p>
-<p>📊 Telegram: add your link</p>
-<p>📧 Email: add your email</p>
-</div>
-</section>
-
-<footer>© 2026 TradeVision Ma</footer>
-
-<!-- WhatsApp Button (link only) -->
-<a class="whatsapp" href="https://wa.me/212631286102" target="_blank">💬</a>
-
-<script>
-let lang = 'ar';
-
-function switchLang(){
-lang = lang === 'ar' ? 'en' : 'ar';
-document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
-showPage('home');
-}
-
-function showPage(page){
-document.querySelectorAll('section').forEach(s => s.style.display='none');
-if(lang === 'ar'){
-document.getElementById(page).style.display='block';
-}else{
-document.getElementById(page+'-en').style.display='block';
-}
-}
-</script>
-
-</body>
-</html>
+        <div class="rules-grid">
+            <!-- Rule 1 -->
+            <div class="rule-card">
+                <span class="rule-number">01</span>
+                <div class="rule-icon"><i class="fas fa-ban"></i></div>
+                <h4 data-i18n="r1_title">غير مرخصة</h4>
+                <p data-i18n="r1_desc">لسنا شركة مرخصة أو مؤسسة مالية ولا نمتلك إطاراً قانونياً استثمارياً. نحن متداولون نشارك الخبرة فقط.</p>
+            </div>
+            <!-- Rule 2 -->
+            <div class="rule-card">
+                <span class="rule-number">02</span>
+                <div class="rule-icon"><i class="fas fa-graduation-cap"></i></div>
+                <h4 data-i18n="r2_title">أغراض تعليمية</h4>
+                <p data-i18n="r2_desc">التوصيات والتحليلات للأغراض التعليمية. كل عضو يتحمل مسؤولية قراراته المالية كاملة.</p>
+            </div>
+            <!-- Rule 3 -->
+            <div class="rule-card">
+                <span class="rule-number">03</span>
+                <div class="rule-icon"><i class="fas fa-user-check"></i></div>
+                <h4 data-i18n="r3_title">+18 سنة فقط</h4>
+                <p data-i18n="r3_desc">المشاركة مسموحة فقط للأشخاص الراشدين. القصر غير مسموح لهم بالتداول أو الانضمام.</p>
+            </div>
+            <!-- Rule 4 -->
+            <div cl
