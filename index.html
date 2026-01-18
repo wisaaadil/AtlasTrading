@@ -1,59 +1,219 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TradeVision Ma</title>
-  <style>
-    /* ===== CSS داخلي ===== */
-    * {margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif;}
-    body {background:#f5f5f5; color:#333;}
-    header {background:#1a73e8; color:white; padding:20px 10px; text-align:center;}
-    header img {height:60px;}
-    nav {margin-top:10px;}
-    nav a {color:white; text-decoration:none; margin:0 15px; font-weight:bold;}
-    nav a:hover {text-decoration:underline;}
-    section {padding:50px 20px; text-align:center;}
-    section h2 {margin-bottom:20px; color:#1a73e8;}
-    section p {max-width:800px; margin:auto; line-height:1.6;}
-    footer {background:#333; color:white; padding:20px; text-align:center;}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TradeVision Ma</title>
+
+<style>
+body{
+margin:0;
+font-family:Segoe UI,Tahoma,Arial;
+background:#f4f6f9;
+color:#222
+}
+header{
+background:#0a2a43;
+color:#fff;
+padding:20px;
+text-align:center;
+position:relative
+}
+nav a{
+color:#fff;
+margin:0 12px;
+text-decoration:none;
+font-weight:bold
+}
+section{
+padding:60px 20px;
+max-width:1100px;
+margin:auto;
+display:none
+}
+section.active{display:block}
+.hero{text-align:center}
+.hero img{
+max-width:100%;
+border-radius:14px;
+margin-top:25px
+}
+.card{
+background:#fff;
+padding:30px;
+border-radius:14px;
+box-shadow:0 5px 15px rgba(0,0,0,.08)
+}
+footer{
+background:#0a2a43;
+color:#fff;
+text-align:center;
+padding:20px
+}
+.lang{
+position:absolute;
+top:15px;
+left:20px;
+cursor:pointer;
+font-weight:bold
+}
+.logo{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px
+}
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:#fff;
+padding:15px;
+border-radius:50%;
+font-size:22px;
+text-decoration:none
+}
+</style>
 </head>
+
 <body>
 
-  <!-- ===== الهيدر مع الشعار والقائمة ===== -->
-  <header>
-    <img src="./logo.png" alt="TradeVision Ma Logo">
-    <h1>TradeVision Ma</h1>
-    <nav>
-      <a href="#home">الرئيسية</a>
-      <a href="#about">حولنا</a>
-      <a href="#contact">اتصل بنا</a>
-    </nav>
-  </header>
+<header>
+<div class="lang" onclick="switchLang()">AR | EN</div>
 
-  <!-- ===== قسم الرئيسية ===== -->
-  <section id="home">
-    <h2>مرحباً بكم في TradeVision Ma</h2>
-    <p>نقدم لكم أفضل التوصيات والنصائح في مجال التداول بطريقة احترافية. تابعونا للحصول على آخر المستجدات والخبرات العملية في السوق.</p>
-  </section>
+<div class="logo">
+<!-- CANDLE LOGO -->
+<svg width="45" height="45" viewBox="0 0 120 120">
+<rect x="20" y="30" width="15" height="50" fill="#00c853"/>
+<line x1="27" y1="15" x2="27" y2="95" stroke="#00c853" stroke-width="4"/>
+<rect x="55" y="45" width="15" height="35" fill="#d50000"/>
+<line x1="62" y1="25" x2="62" y2="95" stroke="#d50000" stroke-width="4"/>
+<rect x="90" y="20" width="15" height="60" fill="#00c853"/>
+<line x1="97" y1="10" x2="97" y2="95" stroke="#00c853" stroke-width="4"/>
+</svg>
+<h1>TradeVision Ma</h1>
+</div>
 
-  <!-- ===== قسم حولنا ===== -->
-  <section id="about">
-    <h2>حولنا</h2>
-    <p>TradeVision Ma هو موقع مخصص لمساعدة المتداولين الجدد والمحترفين على حد سواء، لتعلم استراتيجيات التداول وتحقيق الأرباح من خلال تقديم محتوى موثوق ومجاني.</p>
-  </section>
+<nav>
+<a href="#" onclick="showPage('home')">الرئيسية</a>
+<a href="#" onclick="showPage('about')">من نحن</a>
+<a href="#" onclick="showPage('rules')">القوانين</a>
+<a href="#" onclick="showPage('contact')">تواصل معنا</a>
+</nav>
+</header>
 
-  <!-- ===== قسم الاتصال ===== -->
-  <section id="contact">
-    <h2>اتصل بنا</h2>
-    <p>لأي استفسار أو تعاون، يمكنكم مراسلتنا عبر البريد الإلكتروني: <strong>contact@tradevisionma.com</strong></p>
-  </section>
+<!-- HOME AR -->
+<section id="home" class="active ar">
+<div class="hero">
+<h2>مرحبا بكم في TradeVision Ma</h2>
+<p>منصة تعليمية لمشاركة التحليل والتجربة في أسواق التداول</p>
+<img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3" alt="Trading Candles">
+<p>اختر من القائمة أعلاه القسم الذي تريد زيارته</p>
+</div>
+</section>
 
-  <!-- ===== الفوتر ===== -->
-  <footer>
-    &copy; 2026 TradeVision Ma. جميع الحقوق محفوظة.
-  </footer>
+<!-- HOME EN -->
+<section id="home-en" class="en">
+<div class="hero">
+<h2>Welcome to TradeVision Ma</h2>
+<p>An educational platform for sharing trading analysis and experience</p>
+<img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3" alt="Trading Candles">
+<p>Please choose a section from the menu above</p>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="ar">
+<div class="card">
+<h2>من نحن</h2>
+<p>
+TradeVision Ma منصة أنشأها متداولون مستقلون لمشاركة المعرفة والخبرة في الأسواق المالية،
+دون تقديم استشارات مالية مرخصة أو إدارة أموال الغير.
+</p>
+</div>
+</section>
+
+<section id="about-en" class="en">
+<div class="card">
+<h2>About Us</h2>
+<p>
+TradeVision Ma is an educational platform created by independent traders
+to share market experience without managing client funds.
+</p>
+</div>
+</section>
+
+<!-- RULES -->
+<section id="rules" class="ar">
+<div class="card">
+<h2>القوانين وإخلاء المسؤولية</h2>
+<ol>
+<li>لسنا شركة مرخصة أو مؤسسة مالية.</li>
+<li>جميع المحتويات لأغراض تعليمية فقط.</li>
+<li>الانضمام للبالغين (+18).</li>
+<li>لا نضمن أي أرباح.</li>
+<li>كل شخص مسؤول عن قراراته.</li>
+<li>نلتزم بالقوانين المغربية.</li>
+</ol>
+</div>
+</section>
+
+<section id="rules-en" class="en">
+<div class="card">
+<h2>Disclaimer</h2>
+<ul>
+<li>Not a licensed financial company</li>
+<li>Educational content only</li>
+<li>18+ only</li>
+<li>No profit guarantee</li>
+<li>Individual responsibility</li>
+</ul>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="ar">
+<div class="card">
+<h2>تواصل معنا</h2>
+<p>📱 التواصل عبر واتساب باستخدام الزر</p>
+<p>📊 تيليغرام: ضع رابطك هنا</p>
+<p>📧 بريد إلكتروني: ضع بريدك هنا</p>
+</div>
+</section>
+
+<section id="contact-en" class="en">
+<div class="card">
+<h2>Contact Us</h2>
+<p>📱 Contact us via WhatsApp using the button</p>
+<p>📊 Telegram: add your link</p>
+<p>📧 Email: add your email</p>
+</div>
+</section>
+
+<footer>© 2026 TradeVision Ma</footer>
+
+<!-- WhatsApp Button (link only) -->
+<a class="whatsapp" href="https://wa.me/212631286102" target="_blank">💬</a>
+
+<script>
+let lang = 'ar';
+
+function switchLang(){
+lang = lang === 'ar' ? 'en' : 'ar';
+document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+showPage('home');
+}
+
+function showPage(page){
+document.querySelectorAll('section').forEach(s => s.style.display='none');
+if(lang === 'ar'){
+document.getElementById(page).style.display='block';
+}else{
+document.getElementById(page+'-en').style.display='block';
+}
+}
+</script>
 
 </body>
 </html>
